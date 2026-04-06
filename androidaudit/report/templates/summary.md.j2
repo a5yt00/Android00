@@ -1,0 +1,21 @@
+# Android Pentest Executive Summary: {{ package }}
+
+During the runtime auditing of `{{ package }}`, our system discovered a total of **{{ total }}** issues across the application. 
+Breakdown: **{{ counts['critical'] }} Critical, {{ counts['high'] }} High, {{ counts['medium'] }} Medium, {{ counts['low'] }} Low, {{ counts['info'] }} Info**.
+
+## Findings Overview
+
+| Severity | Title | CVSS | OWASP | Module |
+|---|---|---|---|---|
+{% for f in findings %}| {{ f.severity.value|upper }} | {{ f.title }} | {{ f.cvss_score }} | {{ f.owasp_category }} | {{ f.module }} |
+{% endfor %}
+
+## Top Findings
+
+{% for f in findings[:3] %}
+### {{ f.title }} ({{ f.severity.value|upper }})
+- **CVSS:** {{ f.cvss_score }}
+- **Description:** {{ f.description }}
+- **Remediation:** {{ f.remediation }}
+
+{% endfor %}

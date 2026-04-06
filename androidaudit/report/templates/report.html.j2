@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AndroidAudit Report - {{ package }}</title>
+<style>
+body { font-family: sans-serif; margin: 2rem; background: #f9f9f9; }
+h1 { color: #333; }
+.badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; color: white; display: inline-block;}
+.critical { background-color: #d32f2f; }
+.high { background-color: #f57c00; }
+.medium { background-color: #fbc02d; color: #333; }
+.low { background-color: #388e3c; }
+.info { background-color: #1976d2; }
+table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+th, td { padding: 8px; border: 1px solid #ddd; text-align: left; }
+th { background: #eee; }
+.finding-box { background: white; padding: 1rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 1rem;}
+pre { background: #222; color: #0f0; padding: 8px; overflow-x: auto; }
+</style>
+</head>
+<body>
+<h1>Android Pentest Report: {{ package }}</h1>
+<div style="background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+  <h2>Executive Summary</h2>
+  <p>Total Findings: {{ total }}</p>
+  <div>
+    <span class="badge critical">Critical: {{ counts['critical'] }}</span>
+    <span class="badge high">High: {{ counts['high'] }}</span>
+    <span class="badge medium">Medium: {{ counts['medium'] }}</span>
+    <span class="badge low">Low: {{ counts['low'] }}</span>
+    <span class="badge info">Info: {{ counts['info'] }}</span>
+  </div>
+</div>
+
+<h2>Findings Details</h2>
+{% for f in findings %}
+<div class="finding-box">
+  <h3>{{ f.title }} <span class="badge {{ f.severity.value }}">{{ f.severity.value|upper }}</span></h3>
+  <p><strong>ID:</strong> {{ f.id }} | <strong>CVSS Score:</strong> {{ f.cvss_score }} ({{ f.cvss_vector }})</p>
+  <p><strong>OWASP:</strong> {{ f.owasp_category }}</p>
+  <p><strong>Module:</strong> {{ f.module }}</p>
+  {% if f.file_path %}
+  <p><strong>File:</strong> {{ f.file_path }} {% if f.line_number %}(Line {{ f.line_number }}){% endif %}</p>
+  {% endif %}
+  <p><strong>Description:</strong> {{ f.description }}</p>
+  <h4>Evidence:</h4>
+  <pre>{{ f.evidence }}</pre>
+  <h4>Remediation:</h4>
+  <p>{{ f.remediation }}</p>
+</div>
+{% endfor %}
+</body>
+</html>

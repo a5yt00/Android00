@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "androidaudit"
+version = "0.1.0"
+description = "Android Pentesting CLI Tool"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "click>=8.1.0",
+    "rich>=13.0.0",
+    "pure-python-adb",
+    "androguard>=3.4.0",
+    "frida-tools>=12.0.0",
+    "mitmproxy>=10.0.0",
+    "jinja2>=3.1.0",
+    "cvss>=2.6",
+    "python-dotenv>=1.0.0",
+    "toml>=0.10.2"
+]
+
+[project.scripts]
+androidaudit = "androidaudit.cli:cli"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true

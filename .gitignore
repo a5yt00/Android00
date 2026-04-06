@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+androidaudit.egg-info/
+.venv/
+env/
+venv/
+ENV/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Unit test / coverage
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Local configuration
+.env
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project specific
+reports/
+platform-tools/
+platform-tools.zip
+*.apk
+*.log
